@@ -1,0 +1,24 @@
+{
+  "name": "tsaxiosapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx mocha --require ts-node/register ./src/api/spec/signUp.test.ts"
+  },
+  "author": "dharun",
+  "license": "ISC",
+  "dependencies": {
+    "@faker-js/faker": "^8.4.1",
+    "@types/node": "^20.11.25",
+    "axios": "^1.6.7",
+    "typescript": "^5.4.2"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.12",
+    "@types/mocha": "^10.0.6",
+    "chai": "^4.3.11",
+    "mocha": "^10.3.0",
+    "ts-node": "^10.9.2"
+  }
+}
