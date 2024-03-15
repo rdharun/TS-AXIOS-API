@@ -8,6 +8,7 @@ import { CartResponse } from "../models/response/cart/cartResponse";
 import { AddItemToCartRequest } from "../models/request/cartItems/addItemToCartRequest";
 import { AddItemToCartResponse } from "../models/response/cartItems/addItemToCartResponse";
 import { expect } from "chai";
+import { UpdateItemToCartResponse } from "../models/response/cartItems/updateItemToCartResponse";
 
 
 
@@ -56,6 +57,35 @@ describe('Cart Items API', () => {
         expect(addItemToCartResponse.cart_id).to.equal(cartId);
         expect(addItemToCartResponse.product_id).to.be.equal(product.id);
         expect(addItemToCartResponse.quantity).to.be.equal(quantity);
+
+    })
+
+    it('update item to the cart', async() => {
+
+        let quantity: number = 10;
+        const cartId = cartResponse.cart_id;
+        // Add product to cart
+           const addItemToCartRequest: AddItemToCartRequest = {
+            product_id: product.id,
+            quantity: quantity
+        };
+
+        const addItemToCartResponse : AddItemToCartResponse = await cartItemService.addItemToCart(accessToken, addItemToCartRequest, cartId);
+
+
+        quantity = 15;
+        const cartItemId: string = addItemToCartResponse.cart_item_id;
+        const updateItemRequestBody: AddItemToCartRequest = {
+            product_id: product.id,
+            quantity: quantity
+        };
+
+        const updateItemToCartResponse : UpdateItemToCartResponse = await cartItemService.updateItemToCart(accessToken, updateItemRequestBody, cartId, cartItemId);
+
+        expect(updateItemToCartResponse.status).to.equal(200);
+        expect(updateItemToCartResponse.cart_id).to.be.equal(cartId);
+        expect(updateItemToCartResponse.product_id).to.be.equal(product.id);
+        expect(updateItemToCartResponse.quantity).to.be.equal(quantity);
 
     })
 
